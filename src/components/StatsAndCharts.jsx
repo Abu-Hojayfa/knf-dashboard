@@ -158,7 +158,7 @@ function StatsAndCharts({
           <div className="bg-slate-50 border-b border-slate-100 px-5 py-4">
             <h2 className="text-sm sm:text-base font-bold text-[#0a3d2e] flex items-center gap-2">
               <Briefcase className="w-4 h-4 text-emerald-600" />
-              পেশা অনুযায়ী বিভাজন (শীর্ষ ৭)
+              পেশা অনুযায়ী বিভাজন (শীর্ষ ৫)
             </h2>
           </div>
           <div className="p-5 flex-1 flex flex-col justify-center">
