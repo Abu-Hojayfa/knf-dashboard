@@ -118,7 +118,7 @@ function App() {
     return counts;
   }, [allData]);
 
-  // Compute Profession Distribution (top 5)
+  // Compute Profession Distribution (top 3)
   const topProfessions = useMemo(() => {
     const counts = {};
     allData.forEach(r => {
@@ -130,7 +130,7 @@ function App() {
     
     return Object.entries(counts)
       .sort((a, b) => b[1] - a[1])
-      .slice(0, 5)
+      .slice(0, 3)
       .map(([name, count]) => ({ name, count }));
   }, [allData]);
 
