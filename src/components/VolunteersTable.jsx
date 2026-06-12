@@ -172,6 +172,18 @@ function VolunteersTable({
                       <div className="font-semibold text-emerald-950 group-hover:text-emerald-800 font-bengali">
                         {row[2] || '—'}
                       </div>
+                      {row[33] && (row[33].includes('হ্যাঁ') || row[33].includes('আগ্রহী')) && !row[33].includes('না') && !row[33].includes('নই') && (
+                        <div className="mt-1 flex flex-wrap items-center gap-1.5 font-bengali">
+                          <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded bg-amber-50 border border-amber-200 text-amber-800 text-[10px] font-bold">
+                            <span className="text-[9px]">৳</span> {row[34] || 'আগ্রহী'}
+                          </span>
+                          {row[35] && (
+                            <span className="text-[10px] text-slate-400 font-medium">
+                              (তারিখ: {row[35]})
+                            </span>
+                          )}
+                        </div>
+                      )}
                     </td>
                     <td className="px-4 py-3.5 sm:px-6 sm:py-4 text-slate-600 select-all font-mono text-[11px] sm:text-xs">
                       {row[7] || '—'}

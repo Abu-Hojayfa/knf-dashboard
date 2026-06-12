@@ -7,6 +7,7 @@ import StatsAndCharts from './components/StatsAndCharts';
 import VolunteersTable from './components/VolunteersTable';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import { Analytics } from '@vercel/analytics/react';
+import { normalizeDigits, parseDonationAmount } from './utils/numberUtils';
 
 const SHEET_ID = '1tAs1zh6RKEtZSL088KXKl9iZ1mD-Di8Zz88eDBZtRJs';
 const SHEET_NAME = 'Form Responses 1';
@@ -92,7 +93,14 @@ function App() {
     const uniqueBloodGroups = new Set(allData.map(r => r[23]).filter(Boolean)).size;
     const uniqueProfessions = new Set(allData.map(r => r[17]).filter(Boolean)).size;
     const plateletDonors = allData.filter(r => r[27] && r[27].includes('হ্যাঁ')).length;
-    const monthlyDonors = allData.filter(r => r[33] && (r[33].includes('হ্যাঁ') || r[33].includes('আগ্রহী')) && !r[33].includes('না') && !r[33].includes('নই')).length;
+    
+    // Sum total monthly donation amount, handling both Bengali and English digits
+    const monthlyDonorsList = allData.filter(r => r[33] && (r[33].includes('হ্যাঁ') || r[33].includes('আগ্রহী')) && !r[33].includes('না') && !r[33].includes('নই'));
+    const monthlyDonors = monthlyDonorsList.length;
+    
+    const totalDonationAmount = monthlyDonorsList.reduce((sum, r) => {
+      return sum + parseDonationAmount(r[34]);
+    }, 0);
     
     return {
       total,
@@ -100,7 +108,8 @@ function App() {
       uniqueBloodGroups,
       uniqueProfessions,
       plateletDonors,
-      monthlyDonors
+      monthlyDonors,
+      totalDonationAmount
     };
   }, [allData]);
 
@@ -143,13 +152,23 @@ function App() {
   // Filter logic
   const filteredData = useMemo(() => {
     return allData.filter(r => {
-      // Search: Name (2), Mobile (7), Address (10)
+      // Search: Name (2), Mobile (7), Address (10), Donation Amount (34)
       if (searchQuery) {
         const query = searchQuery.toLowerCase();
+        const normalizedQuery = normalizeDigits(query);
         const name = (r[2] || '').toLowerCase();
         const mobile = (r[7] || '').toLowerCase();
+        const normalizedMobile = normalizeDigits(mobile);
         const address = (r[10] || '').toLowerCase();
-        if (!name.includes(query) && !mobile.includes(query) && !address.includes(query)) {
+        const donationAmount = (r[34] || '').toLowerCase();
+        const normalizedDonation = normalizeDigits(donationAmount);
+        
+        const matchesName = name.includes(query);
+        const matchesMobile = mobile.includes(query) || (normalizedMobile && normalizedMobile.includes(normalizedQuery));
+        const matchesAddress = address.includes(query);
+        const matchesDonation = donationAmount.includes(query) || (normalizedDonation && normalizedDonation.includes(normalizedQuery));
+        
+        if (!matchesName && !matchesMobile && !matchesAddress && !matchesDonation) {
           return false;
         }
       }

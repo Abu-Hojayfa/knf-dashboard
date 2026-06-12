@@ -118,7 +118,18 @@ function StatsAndCharts({
             </svg>
           </div>
           <div className={`text-2xl sm:text-4xl font-bold tracking-tight ${donationFilter ? 'text-white' : 'text-slate-800'}`}>
-            {loading ? <span className="inline-block w-12 h-8 bg-amber-100/40 animate-pulse rounded" /> : stats.monthlyDonors}
+            {loading ? (
+              <span className="inline-block w-12 h-8 bg-amber-100/40 animate-pulse rounded" />
+            ) : (
+              <div className="flex items-baseline gap-1.5 flex-wrap">
+                <span>{stats.monthlyDonors}</span>
+                {stats.totalDonationAmount > 0 && (
+                  <span className={`text-xs sm:text-sm font-semibold ${donationFilter ? 'text-amber-100' : 'text-amber-700'}`}>
+                    ({stats.totalDonationAmount} ৳)
+                  </span>
+                )}
+              </div>
+            )}
           </div>
           <div className={`text-[10px] sm:text-xs mt-1 font-medium ${donationFilter ? 'text-amber-100' : 'text-slate-500'}`}>
             {donationFilter ? '✓ ফিল্টার চালু আছে' : 'দানে আগ্রহী সদস্য'}
