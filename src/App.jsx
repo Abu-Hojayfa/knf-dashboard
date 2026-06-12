@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
+import heroIcon from './assets/hero.jpg';
 import {
   Search,
   RefreshCw,
@@ -221,8 +222,8 @@ function App() {
       <header className="sticky top-0 z-40 bg-[#0a3d2e] border-b border-emerald-800/40 shadow-md backdrop-blur-md bg-opacity-95">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-tr from-emerald-800 to-emerald-600 rounded-xl flex items-center justify-center shadow-lg border border-emerald-500/20 text-white transform hover:rotate-6 transition-transform duration-300">
-              <Droplet className="w-6 h-6 sm:w-7 sm:h-7 text-red-500 fill-current animate-pulse" />
+            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-tr from-emerald-800 to-emerald-600 rounded-xl overflow-hidden flex items-center justify-center shadow-lg border border-emerald-500/20 transform hover:rotate-6 transition-transform duration-300">
+              <img src={heroIcon} alt="খতমে নবুওয়াত ফাউন্ডেশন লোগো" className="w-full h-full object-cover" />
             </div>
             <div>
               <h1 className="font-serif-bengali text-lg sm:text-2xl font-bold text-white tracking-wide leading-tight">
