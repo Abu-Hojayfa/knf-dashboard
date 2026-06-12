@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Noto+Serif+Bengali:wght@400;600;700&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  --font-bengali: 'Hind Siliguri', sans-serif;
+  --font-serif-bengali: 'Noto Serif Bengali', serif;
+}
+
+body {
+  font-family: var(--font-bengali);
+  background-color: #f7f9f8;
+  color: #0d1f18;
+}
