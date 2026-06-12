@@ -80,7 +80,13 @@ function App() {
 
       setAllData(parsed);
       const now = new Date();
-      setLastUpdated(`${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`);
+      const dateStr = `${now.getDate().toString().padStart(2, '0')}/${(now.getMonth() + 1).toString().padStart(2, '0')}/${now.getFullYear()}`;
+      let hours = now.getHours();
+      const ampm = hours >= 12 ? 'PM' : 'AM';
+      hours = hours % 12;
+      hours = hours ? hours : 12; // 0 hour becomes 12
+      const timeStr = `${hours.toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')} ${ampm}`;
+      setLastUpdated(`${dateStr} ${timeStr}`);
     } catch (err) {
       console.error(err);
       setError(err.message || 'ডেটা লোড করতে সমস্যা হয়েছে।');
