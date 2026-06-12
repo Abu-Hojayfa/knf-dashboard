@@ -24,6 +24,7 @@ import {
   BookOpen,
   Info
 } from 'lucide-react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 const SHEET_ID = '1tAs1zh6RKEtZSL088KXKl9iZ1mD-Di8Zz88eDBZtRJs';
 const SHEET_NAME = 'Form Responses 1';
@@ -985,6 +986,7 @@ function App() {
         </div>
       )}
 
+      <SpeedInsights />
     </div>
   );
 }
