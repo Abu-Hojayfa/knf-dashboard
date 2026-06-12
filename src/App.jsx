@@ -232,6 +232,8 @@ function App() {
           topProfessions={topProfessions}
           selectedBloodGroup={selectedBloodGroup}
           toggleBloodGroup={toggleBloodGroup}
+          donorStatusFilter={donorStatusFilter}
+          setDonorStatusFilter={setDonorStatusFilter}
           donationFilter={donationFilter}
           setDonationFilter={setDonationFilter}
         />

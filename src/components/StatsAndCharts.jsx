@@ -8,6 +8,8 @@ function StatsAndCharts({
   topProfessions,
   selectedBloodGroup,
   toggleBloodGroup,
+  donorStatusFilter,
+  setDonorStatusFilter,
   donationFilter,
   setDonationFilter
 }) {
@@ -30,30 +32,48 @@ function StatsAndCharts({
         </div>
 
         {/* Card 2: Emergency Donors */}
-        <div className="relative overflow-hidden bg-white rounded-2xl p-4 sm:p-6 border border-slate-200 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
-          <div className="absolute top-0 right-0 w-24 h-24 bg-rose-50 rounded-full translate-x-8 -translate-y-8" />
+        <button
+          onClick={() => setDonorStatusFilter(v => v === 'emergency' ? '' : 'emergency')}
+          className={`relative overflow-hidden rounded-2xl p-4 sm:p-6 border shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md text-left cursor-pointer ${
+            donorStatusFilter === 'emergency'
+              ? 'bg-rose-600 border-rose-500 text-white'
+              : 'bg-white border-slate-200 text-slate-800'
+          }`}
+        >
+          <div className={`absolute top-0 right-0 w-24 h-24 rounded-full translate-x-8 -translate-y-8 ${donorStatusFilter === 'emergency' ? 'bg-white/10' : 'bg-rose-50'}`} />
           <div className="flex items-center justify-between mb-3 sm:mb-4">
-            <span className="text-[11px] sm:text-xs font-semibold tracking-wider text-rose-500 uppercase">জরুরি রক্তদাতা</span>
-            <Heart className="w-5 h-5 text-rose-500 fill-rose-100" />
+            <span className={`text-[11px] sm:text-xs font-semibold tracking-wider uppercase ${donorStatusFilter === 'emergency' ? 'text-rose-100' : 'text-rose-500'}`}>জরুরি রক্তদাতা</span>
+            <Heart className={`w-5 h-5 ${donorStatusFilter === 'emergency' ? 'text-white fill-white/20' : 'text-rose-500 fill-rose-100'}`} />
           </div>
-          <div className="text-2xl sm:text-4xl font-bold text-slate-800 tracking-tight">
+          <div className="text-2xl sm:text-4xl font-bold tracking-tight">
             {loading ? <span className="inline-block w-12 h-8 bg-slate-100 animate-pulse rounded" /> : stats.emergencyDonors}
           </div>
-          <div className="text-[10px] sm:text-xs text-slate-500 mt-1 font-medium">জরুরি রক্তদানে আগ্রহী</div>
-        </div>
+          <div className={`text-[10px] sm:text-xs mt-1 font-medium ${donorStatusFilter === 'emergency' ? 'text-rose-100' : 'text-slate-500'}`}>
+            {donorStatusFilter === 'emergency' ? '✓ ফিল্টার চালু আছে' : 'জরুরি রক্তদানে আগ্রহী'}
+          </div>
+        </button>
 
         {/* Card 3: Platelet Donors */}
-        <div className="relative overflow-hidden bg-white rounded-2xl p-4 sm:p-6 border border-slate-200 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
-          <div className="absolute top-0 right-0 w-24 h-24 bg-red-50/50 rounded-full translate-x-8 -translate-y-8" />
+        <button
+          onClick={() => setDonorStatusFilter(v => v === 'platelet' ? '' : 'platelet')}
+          className={`relative overflow-hidden rounded-2xl p-4 sm:p-6 border shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md text-left cursor-pointer ${
+            donorStatusFilter === 'platelet'
+              ? 'bg-red-600 border-red-500 text-white'
+              : 'bg-white border-slate-200 text-slate-800'
+          }`}
+        >
+          <div className={`absolute top-0 right-0 w-24 h-24 rounded-full translate-x-8 -translate-y-8 ${donorStatusFilter === 'platelet' ? 'bg-white/10' : 'bg-red-50/50'}`} />
           <div className="flex items-center justify-between mb-3 sm:mb-4">
-            <span className="text-[11px] sm:text-xs font-semibold tracking-wider text-red-600 uppercase">প্লাটিলেট দাতা</span>
-            <Droplet className="w-5 h-5 text-red-600 fill-red-50" />
+            <span className={`text-[11px] sm:text-xs font-semibold tracking-wider uppercase ${donorStatusFilter === 'platelet' ? 'text-red-100' : 'text-red-600'}`}>প্লাটিলেট দাতা</span>
+            <Droplet className={`w-5 h-5 ${donorStatusFilter === 'platelet' ? 'text-white fill-white/20' : 'text-red-600 fill-red-50'}`} />
           </div>
-          <div className="text-2xl sm:text-4xl font-bold text-slate-800 tracking-tight">
+          <div className="text-2xl sm:text-4xl font-bold tracking-tight">
             {loading ? <span className="inline-block w-12 h-8 bg-slate-100 animate-pulse rounded" /> : stats.plateletDonors}
           </div>
-          <div className="text-[10px] sm:text-xs text-slate-500 mt-1 font-medium">অ্যাফেরেসিস আগ্রহী</div>
-        </div>
+          <div className={`text-[10px] sm:text-xs mt-1 font-medium ${donorStatusFilter === 'platelet' ? 'text-red-100' : 'text-slate-500'}`}>
+            {donorStatusFilter === 'platelet' ? '✓ ফিল্টার চালু আছে' : 'অ্যাফেরেসিস আগ্রহী'}
+          </div>
+        </button>
 
         {/* Card 4: Blood Groups */}
         <div className="relative overflow-hidden bg-white rounded-2xl p-4 sm:p-6 border border-slate-200 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
